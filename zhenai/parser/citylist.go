@@ -13,14 +13,23 @@ func ParseCityList(contents []byte) engine.ParseResult {
 	allMatchStrings := regx.FindAllStringSubmatch(string(contents), -1)
 
 	result := engine.ParseResult{}
+	// contro
+	limit := 10
+	//-----
 
 	for _, value := range allMatchStrings {
-		result.Items = append(result.Items, string(value[2]))
+		result.Items = append(result.Items, "City " + string(value[2]))
 		result.Requests = append(result.Requests, engine.Request{
 			Url:        value[1],
-			ParserFunc: engine.NilParser,
+			ParserFunc: ParseUser,
 		})
+		limit--
+		if limit==0 {
+			break
+		}
 	}
+
+
 
 	return result
 

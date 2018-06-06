@@ -5,25 +5,25 @@ import (
 	"justforunc/fetcher"
 )
 
-func TestParseCityList(t *testing.T) {
-	contens, err := fetcher.Fetch("http://www.zhenai.com/zhenghun")
+func TestParseUser(t *testing.T) {
+	contens, err := fetcher.Fetch("http://www.zhenai.com/zhenghun/aomen")
 	if err != nil {
 		panic(err)
 	}
 
-	parseResult := ParseCityList(contens)
+	parseResult := ParseUser(contens)
 
 	// verify parseList
 
-	const resultSize int = 470
+	const resultSize int = 16
 	expectedUrls := []string{
-		"http://www.zhenai.com/zhenghun/aba",
-		"http://www.zhenai.com/zhenghun/akesu",
-		"http://www.zhenai.com/zhenghun/alashanmeng",
+		"http://album.zhenai.com/u/1122926649",
+		"http://album.zhenai.com/u/107045901",
+		"http://album.zhenai.com/u/109053717",
 	}
 
 	expectedItems := []string{
-		"City 阿坝", "City 阿克苏", "City 阿拉善盟",
+		"User 放风筝的人", "User 拼了命的开心", "User Gave",
 	}
 
 	if len(parseResult.Requests) != resultSize {
@@ -49,5 +49,4 @@ func TestParseCityList(t *testing.T) {
 				item, parseResult.Items[i])
 		}
 	}
-
 }
