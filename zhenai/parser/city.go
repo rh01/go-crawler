@@ -15,12 +15,13 @@ func ParseUser(contents []byte) engine.ParseResult {
 	result := engine.ParseResult{}
 
 	for _, value := range allMatchStrings {
+		name := string(value[2])
 		result.Items = append(result.Items, "User " +  string(value[2]))
 		result.Requests = append(result.Requests, engine.Request{
 			Url:        value[1],
 			// function bibao
 			ParserFunc: func(c []byte) engine.ParseResult {
-				return ParseProfile(c, string(value[2]))
+				return ParseProfile(c, name)
 			},
 		})
 	}
