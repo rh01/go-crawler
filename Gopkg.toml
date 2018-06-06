@@ -28,3 +28,7 @@
 [prune]
   go-tests = true
   unused-packages = true
+
+[[constraint]]
+  name = "golang.org/x/text"
+  version = "0.3.0"
